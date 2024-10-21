@@ -5,13 +5,13 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+
+import java.time.LocalDate;
 
 @Entity
 public class Person {
-    @NotEmpty
-    private String name;
-    @NotEmpty
-    private String surname;
+
     @Email
     private String email;
     @NotEmpty
@@ -26,9 +26,27 @@ public class Person {
     @Id
     private long userId;
 
+    @NotEmpty
+    private String name;
+
+    private String surname;
+    @NotEmpty
+    private String patronymic;
+    @Min(value = 0)
+    private int age;
+    @NotEmpty
+    private String birthdayTime;
+    @NotEmpty
+    @Pattern(regexp = "\\+[0-9]+")
+    private String phoneNumber;
+    @NotEmpty
+    private String sex;
+
+
+
     public Person(){}
 
-    public Person(String name, String surname, String email, String endpoint, String login, String message, String supportLevel, long timestamp, long userId) {
+    public Person(String name, String surname, String email, String endpoint, String login, String message, String supportLevel, long timestamp, long userId, String patronymic, int age, String birthdayTime, String phoneNumber, String sex) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -38,6 +56,11 @@ public class Person {
         this.supportLevel = supportLevel;
         this.timestamp = timestamp;
         this.userId = userId;
+        this.patronymic = patronymic;
+        this.age = age;
+        this.birthdayTime = birthdayTime;
+        this.phoneNumber = phoneNumber;
+        this.sex = sex;
     }
 
     public String getName() {
@@ -112,18 +135,63 @@ public class Person {
         this.login = login;
     }
 
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getBirthdayTime() {
+        return birthdayTime;
+    }
+
+    public void setBirthdayTime(String birthdayTime) {
+        this.birthdayTime = birthdayTime;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", endpoint='" + endpoint + '\'' +
                 ", login='" + login + '\'' +
                 ", message='" + message + '\'' +
                 ", supportLevel='" + supportLevel + '\'' +
                 ", timestamp=" + timestamp +
                 ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", age=" + age +
+                ", birthdayTime='" + birthdayTime + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", sex='" + sex + '\'' +
                 '}';
     }
 }

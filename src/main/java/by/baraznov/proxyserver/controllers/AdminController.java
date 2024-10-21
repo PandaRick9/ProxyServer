@@ -1,6 +1,8 @@
 package by.baraznov.proxyserver.controllers;
 
 import by.baraznov.proxyserver.service.AdminsService;
+import by.baraznov.proxyserver.util.AdminErrorResponse;
+import by.baraznov.proxyserver.util.AdminJsonException;
 import by.baraznov.proxyserver.util.PersonErrorResponse;
 import by.baraznov.proxyserver.util.PersonNotCreatedException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,19 +35,19 @@ public class AdminController {
                         .append(error.getDefaultMessage())
                         .append(";");
             }
-            //throw new PersonNotCreatedException(errorMessage.toString());
+            throw new AdminJsonException(errorMessage.toString());
         }
-        //save person on DB
+        //save admin request on DB
         //TODO
         adminsService.setAllFieldsForAdmin(jsonRequest);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-    /*@ExceptionHandler
-    private ResponseEntity<PersonErrorResponse> handleException(PersonNotCreatedException e){
-        PersonErrorResponse response = new PersonErrorResponse(
+    @ExceptionHandler
+    private ResponseEntity<AdminErrorResponse> handleException(AdminJsonException e){
+        AdminErrorResponse response = new AdminErrorResponse(
                 e.getMessage(),
                 System.currentTimeMillis()
         );
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-    }*/
+    }
 }
