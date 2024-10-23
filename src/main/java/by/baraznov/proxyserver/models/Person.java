@@ -1,7 +1,9 @@
 package by.baraznov.proxyserver.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,36 +12,40 @@ import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "Person")
 public class Person {
-
-    @Email
+    @Column(name = "email")
     private String email;
-    @NotEmpty
+    @Column(name = "endpoint")
     private String endpoint;
-    @NotEmpty
+    @Column(name = "login")
     private String login;
-    @NotEmpty
+    @Column(name = "message")
     private String message;
+    @Column(name= "supportlevel")
     private String supportLevel;
-    @Min(value = 0)
+    @Column(name = "timestamp")
     private long timestamp;
+
     @Id
+    @Column(name= "user_id")
     private long userId;
 
-    @NotEmpty
+    @Column(name= "name")
     private String name;
 
+    @Column(name = "surname")
     private String surname;
-    @NotEmpty
+    @Column(name = "patronymic")
     private String patronymic;
-    @Min(value = 0)
+    @Column(name= "age")
     private int age;
-    @NotEmpty
+    @Column(name = "birthdaytime")
     private String birthdayTime;
-    @NotEmpty
+    @Column(name= "phonenumber")
     @Pattern(regexp = "\\+[0-9]+")
     private String phoneNumber;
-    @NotEmpty
+    @Column(name = "sex")
     private String sex;
 
 

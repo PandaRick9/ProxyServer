@@ -1,10 +1,10 @@
 package by.baraznov.proxyserver.controllers;
 
+import by.baraznov.proxyserver.models.Person;
 import by.baraznov.proxyserver.service.AdminsService;
+import by.baraznov.proxyserver.service.PeopleService;
 import by.baraznov.proxyserver.util.AdminErrorResponse;
 import by.baraznov.proxyserver.util.AdminJsonException;
-import by.baraznov.proxyserver.util.PersonErrorResponse;
-import by.baraznov.proxyserver.util.PersonNotCreatedException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +19,14 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
     private final AdminsService adminsService;
+    private final PeopleService peopleService;
+
     @Autowired
-    public AdminController(AdminsService adminsService) {
+    public AdminController(AdminsService adminsService, PeopleService peopleService) {
         this.adminsService = adminsService;
+        this.peopleService = peopleService;
     }
+
 
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody String jsonRequest,
@@ -37,8 +41,6 @@ public class AdminController {
             }
             throw new AdminJsonException(errorMessage.toString());
         }
-        //save admin request on DB
-        //TODO
         adminsService.setAllFieldsForAdmin(jsonRequest);
         return ResponseEntity.ok(HttpStatus.OK);
     }

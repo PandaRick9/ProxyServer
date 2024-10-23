@@ -51,7 +51,7 @@ public class PeopleService {
         peopleRepository.delete(person);
     }
 
-    public void setAllFieldsForPerson(String jsonRequest) throws JsonProcessingException {
+    public Person setAllFieldsForPerson(String jsonRequest) throws JsonProcessingException {
         Person person = new Person();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(jsonRequest);
@@ -86,6 +86,6 @@ public class PeopleService {
         person.setBirthdayTime(birthdayTime);
         person.setPhoneNumber(phoneNumber);
         person.setSex(sex);
-        System.out.println(person);
+        return person;
     }
 }

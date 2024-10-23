@@ -40,9 +40,8 @@ public class SendController {
             }
             throw new PersonNotCreatedException(errorMessage.toString());
         }
-        //save person on DB
-        //TODO
-        peopleService.setAllFieldsForPerson(jsonRequest);
+        Person person  = peopleService.setAllFieldsForPerson(jsonRequest);
+        peopleService.save(person);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @ExceptionHandler

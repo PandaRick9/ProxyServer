@@ -13,10 +13,8 @@ public class AdminsService {
         Admin admin = new Admin();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(jsonRequest);
-        String name = jsonNode.get("name").asText();
         String filter = jsonNode.get("filter").asText();
         String masking = jsonNode.get("masking").asText();
-        admin.setName(name);
         admin.setFilter(filter);
         admin.setMasking(masking);
         System.out.println(admin);
